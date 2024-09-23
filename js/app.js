@@ -44,7 +44,7 @@ const displayLoadData = (allAiInfo, isSeeAll) => {
                 </div>
                 <div class="card-actions justify-end">
                     <button onclick="handleShowDetail(${id})" class="btn btn-circle">
-                        <img src="./assets/arrow.png">
+                        <img src="../assets/arrow.png">
                     </button>
                 </div>
               </div>
@@ -63,7 +63,75 @@ const handleShowDetail = async (id) => {
 }
 
 const displayShowDetails = singleAiInfo => {
-  show_details.showModal()
+  show_details.showModal();
+
+  const { accuracy, website, description, pricing = {}, tool_name, features, integrations } = singleAiInfo;
+
+  const integrationsList = !integrations ? `<li class="text-sm text-[#585858]">No Data Found</li>` : integrations.map(integration => `
+      <li class="list-disc text-sm text-[#585858]">${integration ? integration : "not found"}</li>`).join("");
+
+  const dialogContainer = document.querySelector("#show_details");
+
+  const modalDiv = document.createElement("div");
+  modalDiv.classList = "modal-box max-w-4xl";
+  modalDiv.innerHTML = `
+    <div class="flex justify-between gap-5">
+      <div class="flex-1 bg-[#EB57570D] border border-[#EB5757] p-7 rounded-2xl">
+        <h3 class="text-lg font-bold">${tool_name ? tool_name : "no data found"}</h3>
+        <p class="py-4 text-[#111]">${description ? description : "no data found"}</p>
+        <div class="grid grid-cols-3 gap-3 text-sm">
+          <div class="bg-white flex flex-col justify-center items-center min-h-24 rounded-2xl p-2 text-center font-medium text-[#03A30A]">
+            <p>${pricing?.item1?.price}</p>
+            <p>${pricing?.item1?.plan}</p>
+          </div>
+          <div class="bg-white flex flex-col justify-center items-center min-h-24 rounded-2xl p-2 text-center font-medium text-[#F28927]">
+            <p>${pricing?.item2?.price}</p>
+            <p>${pricing?.item2?.plan}</p>
+          </div>
+          <div class="bg-white flex flex-col justify-center items-center min-h-24 rounded-2xl p-2 text-center font-medium text-[#EB5757]">
+            <p>${pricing?.item3?.price}</p>
+            <p>${pricing?.item3?.plan}</p>
+          </div>
+        </div>
+        <div class="flex justify-between gap-3 mt-4">
+          <div class="">
+            <h3 class="text-lg font-bold">Features</h3>
+            <ul class="ml-5 mt-3" id="features-container">
+
+            </ul>
+          </div>
+          <div class="">
+            <h3 class="text-lg font-bold">Integrations</h3>
+            <ul class="ml-5 mt-3" id="integrations-container">
+              ${integrationsList}
+            </ul>
+          </div>
+        </div>
+        <div class="modal-action">
+          <form method="dialog">
+              <button class="btn bg-[#EB5757] hover:bg-[#EB5757] absolute right-0 top-0 btn-circle">
+                  <img src="../assets/cross.png">
+              </button>
+          </form>
+        </div>
+      </div>
+      <div class="flex-1 border border-[#E7E7E7] rounded-2xl p-6 text-center">
+        <img class="w-full rounded-2xl mb-6 border" src="${singleAiInfo?.image_link[0] ? singleAiInfo?.image_link[0] : "no image found"}" alt="image not found">
+        <h4 class="text-lg font-bold mb-4">${accuracy?.description ? accuracy?.description : "no data found"}</h4>
+        <a href="${website}" class="hover:underline text-[#585858]">${website ? website : "no data found"}</a>
+    </div>
+  `;
+  dialogContainer.appendChild(modalDiv);
+
+  const featuresContainer = modalDiv.querySelector("#features-container");
+  const keys = Object.keys(features);
+  keys.forEach(i => {
+    // console.log(features[i].feature_name)
+    const li = document.createElement("li");
+    li.classList.add("list-disc", "text-[#585858]", "text-sm");
+    li.innerText = features[i].feature_name;
+    featuresContainer.appendChild(li);
+  })
 }
 
 document.querySelector("#see-all-btn").addEventListener("click", () => {
