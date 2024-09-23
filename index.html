@@ -36,24 +36,42 @@
         </div>
 
         <!-- card container start -->
-        <article 
-        id="card-container"
+        <article
+          id="card-container"
           class="my-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5"
+        ></article>
+        <div
+          id="see-all-container"
+          class="flex justify-center items-center hidden"
         >
-          
-        </article>
-        <div id="see-all-container" class="flex justify-center items-center hidden">
-          <button id="see-all-btn"
+          <button
+            id="see-all-btn"
             class="btn bg-[#EB5757] hover:bg-[#EB5757] px-8 text-white rounded-2xl"
           >
             See All
           </button>
         </div>
         <!-- card container end -->
+
+        <!-- modal dialogue -->
+        <!-- Open the modal using ID.showModal() method -->
+        
+        <dialog id="show_details" class="modal modal-bottom sm:modal-middle">
+          <div class="modal-box max-w-4xl">
+            <h3 class="text-lg font-bold">Hello!</h3>
+            <p class="py-4">Press ESC key or click the button below to close</p>
+            <div class="modal-action">
+              <form method="dialog">
+                <!-- if there is a button in form, it will close the modal -->
+                <button class="btn">Close</button>
+              </form>
+            </div>
+          </div>
+        </dialog>
       </section>
     </main>
     <!-- main end -->
-     <script src="./js/utilities.js"></script>
+    <script src="./js/utilities.js"></script>
     <script src="./js/app.js"></script>
   </body>
 </html>

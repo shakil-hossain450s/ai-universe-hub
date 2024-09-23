@@ -8,17 +8,21 @@ const loadData = async (isSeeAll) => {
 const displayLoadData = (allAiInfo, isSeeAll) => {
   const cardContainer = document.querySelector("#card-container");
 
+  cardContainer.textContent = "";
+
   const seeAllContainer = document.querySelector("#see-all-container");
   if (allAiInfo.length > 9 && !isSeeAll) {
     seeAllContainer.classList.remove("hidden");
   } else {
     seeAllContainer.classList.add("hidden");
   }
-  
+
+  if (!isSeeAll) {
     allAiInfo = allAiInfo.slice(0, 9);
+  }
 
   allAiInfo.forEach(aiInfo => {
-    const { image, name, features, published_in } = aiInfo;
+    const { id, image, name, features, published_in } = aiInfo;
     const featureList = features.map((item, index) => `<li class="ml-2 text-[#585858]">${index + 1}. ${item}</li>`).join("");
     const cardDiv = document.createElement("div");
     cardDiv.classList = `card bg-base-100 border border-[#1111111A] p-6 pb-0`;
@@ -39,7 +43,7 @@ const displayLoadData = (allAiInfo, isSeeAll) => {
                     <p class="flex items-center gap-2"><img src="./assets/calender.png"> ${published_in}</p>
                 </div>
                 <div class="card-actions justify-end">
-                    <button class="btn btn-circle">
+                    <button onclick="handleShowDetail(${id})" class="btn btn-circle">
                         <img src="./assets/arrow.png">
                     </button>
                 </div>
@@ -48,6 +52,18 @@ const displayLoadData = (allAiInfo, isSeeAll) => {
         `;
     cardContainer.appendChild(cardDiv);
   })
+}
+
+const handleShowDetail = async (id) => {
+  const formattedId = id.toString().padStart(2, 0);
+  const res = await fetch(`https://openapi.programming-hero.com/api/ai/tool/${formattedId}`);
+  const data = await res.json();
+  const singleAiInfo = data.data;
+  displayShowDetails(singleAiInfo);
+}
+
+const displayShowDetails = singleAiInfo => {
+  show_details.showModal()
 }
 
 document.querySelector("#see-all-btn").addEventListener("click", () => {
