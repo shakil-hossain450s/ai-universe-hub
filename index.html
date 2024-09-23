@@ -11,14 +11,49 @@
       type="text/css"
     />
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- work sans google font  -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body class="container mx-auto lg:px-24 px-10">
     <!-- main start -->
     <main class="my-4 lg:my-10">
+      <section>
+        <!-- section heading -->
         <div class="flex flex-col justify-center items-center text-center">
-            <h2 class="text-[#111111] text-4xl font-semibold">Ai Universe Hub</h2>
+          <h2 class="text-[#111111] text-4xl font-semibold mb-8">
+            Ai Universe Hub
+          </h2>
+          <button
+            class="btn bg-[#EB5757] hover:bg-[#EB5757] px-8 text-white rounded-2xl"
+          >
+            Sort By Date
+          </button>
         </div>
+
+        <!-- card container start -->
+        <article 
+        id="card-container"
+          class="my-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5"
+        >
+          
+        </article>
+        <div class="flex justify-center items-center">
+          <button
+            class="btn bg-[#EB5757] hover:bg-[#EB5757] px-8 text-white rounded-2xl"
+          >
+            See All
+          </button>
+        </div>
+        <!-- card container end -->
+      </section>
     </main>
     <!-- main end -->
+     <script src="./js/utilities.js"></script>
+    <script src="./js/app.js"></script>
   </body>
 </html>
