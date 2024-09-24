@@ -65,7 +65,11 @@ const handleShowDetail = async (id) => {
 const displayShowDetails = singleAiInfo => {
   show_details.showModal();
 
-  const { accuracy, website, description, pricing = {}, tool_name, features, integrations } = singleAiInfo;
+  const { accuracy, website, description, pricing, tool_name, features, integrations } = singleAiInfo;
+
+  const [item1, item2, item3] = pricing;
+
+  console.log(pricing)
 
   const integrationsList = !integrations ? `<li class="text-sm text-[#585858]">No Data Found</li>` : integrations.map(integration => `
       <li class="list-disc text-sm text-[#585858]">${integration ? integration : "not found"}</li>`).join("");
@@ -81,16 +85,16 @@ const displayShowDetails = singleAiInfo => {
         <p class="py-4 text-[#111]">${description ? description : "no data found"}</p>
         <div class="grid grid-cols-3 gap-3 text-sm">
           <div class="bg-white flex flex-col justify-center items-center min-h-24 rounded-2xl p-2 text-center font-medium text-[#03A30A]">
-            <p>${pricing?.item1?.price}</p>
-            <p>${pricing?.item1?.plan}</p>
+            <p>${item1?.price}</p>
+            <p>${item1?.plan}</p>
           </div>
           <div class="bg-white flex flex-col justify-center items-center min-h-24 rounded-2xl p-2 text-center font-medium text-[#F28927]">
-            <p>${pricing?.item2?.price}</p>
-            <p>${pricing?.item2?.plan}</p>
+            <p>${item2?.price}</p>
+            <p>${item2?.plan}</p>
           </div>
           <div class="bg-white flex flex-col justify-center items-center min-h-24 rounded-2xl p-2 text-center font-medium text-[#EB5757]">
-            <p>${pricing?.item3?.price}</p>
-            <p>${pricing?.item3?.plan}</p>
+            <p>${item3?.price}</p>
+            <p>${item3?.plan}</p>
           </div>
         </div>
         <div class="flex justify-between gap-3 mt-4">
